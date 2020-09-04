@@ -1,4 +1,4 @@
-package ru.bersenev.miner;
+package ru.bersenev.miner.jframe;
 
 public class CastomButton extends javax.swing.JButton {
     private int width; // schirina

@@ -3,33 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ru.bersenev.miner;
+package ru.bersenev.miner.jframe;
 
 //import com.sun.deploy.security.SelectableSecurityManager;
 
+
+import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.UserService;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author я
  */
-public class NewGame extends javax.swing.JFrame {
+public class Settings extends javax.swing.JFrame {
     private Window windowGame;
-    private Save save;
+    private UsersTable users;
 
     /**
      * Creates new form NewGame
      */
-    public NewGame(Window windowGame, Save save) {
-        
-        this.save = save;
+    public Settings(Window windowGame, UsersTable users) {
+        this.users = users;
+        this.users = users;
         this.windowGame = windowGame;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        jSpinner1.setValue(save.getLength());
-        if (save.getNomRadioButton() == 2)
-            jSpinner2.setValue(save.getKolBomb());
+        jSpinner1.setValue(users.getLength());
+        if (users.getNomRadioButton() == 2)
+            jSpinner2.setValue(users.getKolBomb());
         else
-            jSpinner2.setValue(save.getPercent());
+            jSpinner2.setValue(users.getPercent());
         buttonGroup();
 
     }
@@ -38,7 +43,7 @@ public class NewGame extends javax.swing.JFrame {
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioButton1);
         group.add(jRadioButton2);
-        if (save.getNomRadioButton() == 1)
+        if (users.getNomRadioButton() == 1)
             jRadioButton1.setSelected(true);
         else
             jRadioButton2.setSelected(true);
@@ -98,6 +103,11 @@ public class NewGame extends javax.swing.JFrame {
         jPanel1.add(jLabel2, gridBagConstraints);
 
         jRadioButton1.setText("количество бомб задается в процентах");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -138,34 +148,39 @@ public class NewGame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (((Integer) jSpinner1.getValue()) < 5)
-            save.setLength(5);
+            users.setLength(5);
         else
-            save.setLength((Integer) jSpinner1.getValue());
+            users.setLength((Integer) jSpinner1.getValue());
 
         if (jRadioButton1.isSelected()) {
             if ((Integer) jSpinner2.getValue() < 30) {
-                save.setPercent((Integer) jSpinner2.getValue());
-                save.setKolBomb((int) (Math.pow(save.getLength(), 2) * 0.01 * ((Integer) jSpinner2.getValue())));
+                users.setPercent((Integer) jSpinner2.getValue());
+                users.setKolBomb((int) (Math.pow(users.getLength(), 2) * 0.01 * ((Integer) jSpinner2.getValue())));
             } else {
-                save.setKolBomb((int) (Math.pow(save.getLength(), 2) * 0.3));
-                save.setPercent(30);
+                users.setKolBomb((int) (Math.pow(users.getLength(), 2) * 0.3));
+                users.setPercent(30);
             }
         } else {
-            save.setKolBomb((Integer) jSpinner2.getValue());
-            if (save.getKolBomb() > Math.pow(save.getLength(), 2) * 0.3)
-                save.setKolBomb((int) (Math.pow(save.getLength(), 2) * 0.3));
+            users.setKolBomb((Integer) jSpinner2.getValue());
+            if (users.getKolBomb() > Math.pow(users.getLength(), 2) * 0.3)
+                users.setKolBomb((int) (Math.pow(users.getLength(), 2) * 0.3));
         }
         if (jRadioButton1.isSelected())
-            save.setNomRadioButton(1);
+            users.setNomRadioButton(1);
         else
-            save.setNomRadioButton(2);
+            users.setNomRadioButton(2);
+new UserService().updateUser(users);
 
-        windowGame.start();
+        windowGame.start(users);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
      * @param args the command line arguments

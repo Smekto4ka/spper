@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ru.bersenev.miner;
+package ru.bersenev.miner.jframe;
+
+import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.UserService;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,35 +16,37 @@ import java.util.Random;
  * @author я
  */
 public class Window extends javax.swing.JFrame {
-    private Save save;
+
     private CastomButton[][] massButton;
     private boolean[][] booleanMassBomb;
     private int kolFlag;
-
+    private UsersTable user;
     private Bomb[] objectMassBomb;
     private boolean permissionToPlay;
-
+    private UserService userService;
 
 
     /**
      * Creates new form Window
      */
     public Window() {
-        save = new Save();
+userService = new UserService();
         initComponents();
-        save.setLength(10);
-       save.setKolBomb(20);
-        save.setNomRadioButton(2);
+
 
     }
 
-    public void start() {
+    public void setWindow(Window window) {
+        this.window = window;
+    }
 
+    public void start(UsersTable user) {
+        this.user = user;
         permissionToPlay = true;
         kolFlag = 0;
 
-        objectMassBomb = new Bomb[save.getKolBomb()];
-        jLabel3.setText("количество бомб на поле : " + Integer.toString(save.getKolBomb()));
+        objectMassBomb = new Bomb[user.getKolBomb()];
+        jLabel3.setText("количество бомб на поле : " + Integer.toString(user.getKolBomb()));
         jPanel2.removeAll();
         jLabel2.setText("количество флагов : " + Integer.toString(kolFlag));
         jLabel1.setText("-");
@@ -53,14 +58,14 @@ public class Window extends javax.swing.JFrame {
     }
 
     private void initBomb() {
-        booleanMassBomb = new boolean[save.getLength()][save.getLength()];
+        booleanMassBomb = new boolean[user.getLength()][user.getLength()];
         int prohod = 0;
         int i;
         int j;
         Random rand = new Random();
-        while (prohod < save.getKolBomb()) {
-            i = rand.nextInt(save.getLength());
-            j = rand.nextInt(save.getLength());
+        while (prohod < user.getKolBomb()) {
+            i = rand.nextInt(user.getLength());
+            j = rand.nextInt(user.getLength());
             if (booleanMassBomb[i][j])
                 continue;
             booleanMassBomb[i][j] = true;
@@ -81,12 +86,12 @@ public class Window extends javax.swing.JFrame {
 
     private void initButton() {
 
-        massButton = new CastomButton[save.getLength()][save.getLength()];
+        massButton = new CastomButton[user.getLength()][user.getLength()];
 
         java.awt.GridBagConstraints gridBagConstraints;
         gridBagConstraints = new java.awt.GridBagConstraints();
-        for (int i = 0; i < save.getLength(); i++) {
-            for (int j = 0; j < save.getLength(); j++) {
+        for (int i = 0; i < user.getLength(); i++) {
+            for (int j = 0; j < user.getLength(); j++) {
                 massButton[i][j] = new CastomButton(i, j);
                 massButton[i][j].addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent event) {
@@ -110,7 +115,7 @@ public class Window extends javax.swing.JFrame {
     }
 
     private void mouseRight(CastomButton button) {
-        if (permissionToPlay && save.getKolBomb() != kolFlag) {
+        if (permissionToPlay && user.getKolBomb() != kolFlag) {
             if ((button.getText()).equals("*")) {
                 button.setText("#");
                 kolFlag++;
@@ -123,7 +128,7 @@ public class Window extends javax.swing.JFrame {
         if (permissionToPlay && (button.getText()).equals("#")) {
             button.setText("*");
             kolFlag--;
-            jLabel2.setText("количество флагов : " +Integer.toString(kolFlag));
+            jLabel2.setText("количество флагов : " + Integer.toString(kolFlag));
             jPanel2.revalidate();
             jPanel2.repaint();
             return;
@@ -153,7 +158,7 @@ public class Window extends javax.swing.JFrame {
         int kol = 0;
         for (int i = button.getCastomHeight() - 1; i <= button.getCastomHeight() + 1; i++) {
             for (int j = button.getCastomWidth() - 1; j <= button.getCastomWidth() + 1; j++) {
-                if (i < 0 || i >= save.getLength() || j < 0 || j >= save.getLength())
+                if (i < 0 || i >= user.getLength() || j < 0 || j >= user.getLength())
                     continue;
                 if ((i == button.getCastomHeight()) && (j == button.getCastomWidth()))
                     continue;
@@ -164,7 +169,7 @@ public class Window extends javax.swing.JFrame {
         }
         switch (kol) {
             case 1:
-              //  button.setForeground(Color.blue);
+                //  button.setForeground(Color.blue);
                 button.setForeground(new Color(255, 93, 91));
                 break;
             case 2:
@@ -201,7 +206,7 @@ public class Window extends javax.swing.JFrame {
         if (kol == 0) {
             for (int i = button.getCastomHeight() - 1; i <= button.getCastomHeight() + 1; i++) {
                 for (int j = button.getCastomWidth() - 1; j <= button.getCastomWidth() + 1; j++) {
-                    if (i < 0 || i >= save.getLength() || j < 0 || j >= save.getLength())
+                    if (i < 0 || i >= user.getLength() || j < 0 || j >= user.getLength())
                         continue;
                     if (massButton[i][j].isEnabled())
                         mouseLeft(massButton[i][j]);
@@ -229,6 +234,7 @@ public class Window extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
@@ -280,6 +286,14 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setText("сменить пользователя");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -288,7 +302,7 @@ public class Window extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (save.getKolBomb() == kolFlag) {
+        if (user.getKolBomb() == kolFlag) {
             for (Bomb bomb : objectMassBomb) {
                 if (!massButton[bomb.getHeight()][bomb.getWidth()].getText().equals("#")) {
                     jLabel1.setText("nepravilno postavlen flag");
@@ -308,24 +322,28 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       new NewGame(window,save).setVisible(true);
+        new Settings(window, user).setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     start();
+        start(user);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        new Users(window).setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+  /*  public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+     */
+     /*   try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -344,15 +362,15 @@ public class Window extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+      /*  java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
                  window = new Window();
                 window.setVisible(true);
             }
         });
-    }
-static Window window;
+    }*/
+    Window window;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -362,6 +380,7 @@ static Window window;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

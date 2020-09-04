@@ -1,4 +1,4 @@
-package ru.bersenev.miner;
+package ru.bersenev.miner.jframe;
 
 public class Bomb {
     private int width; // schirina
