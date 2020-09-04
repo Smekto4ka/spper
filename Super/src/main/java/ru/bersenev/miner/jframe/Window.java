@@ -11,12 +11,12 @@ import ru.bersenev.miner.user.service.UserService;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
-
+// long start = System.currentTimeMillis();
 /**
  * @author ÿ
  */
 public class Window extends javax.swing.JFrame {
-
+private long time;
     private CastomButton[][] massButton;
     private boolean[][] booleanMassBomb;
     private int kolFlag;
@@ -55,6 +55,7 @@ userService = new UserService();
         initButton();
         jPanel2.revalidate();
         jPanel2.repaint();
+        time = System.currentTimeMillis();
     }
 
     private void initBomb() {
@@ -310,8 +311,10 @@ userService = new UserService();
                     return;
                 }
             }
+             time = System.currentTimeMillis() - time;
             jLabel1.setText("vi viigrali");
             permissionToPlay = false;
+            new Win(user,time).setVisible(true);
 
         } else {
             jLabel1.setText("kol bomb > flagov");
