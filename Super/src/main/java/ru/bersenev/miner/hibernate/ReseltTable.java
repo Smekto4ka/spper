@@ -17,7 +17,7 @@ public class ReseltTable {
     private int kolBomb;
     @Column (name = "time")
     private long time;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)//LAZY)//EAGER)
     @JoinColumn(name = "user_name")
     private UsersTable user;
 

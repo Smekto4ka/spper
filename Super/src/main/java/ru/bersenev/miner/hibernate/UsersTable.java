@@ -87,6 +87,9 @@ public class UsersTable {
     public void setReseltTables(List<ReseltTable> reseltTables) {
         this.reseltTables = reseltTables;
     }
+    public void deletResult(){
+        reseltTables.removeAll(reseltTables);
+    }
 
     @Override
     public String toString(){

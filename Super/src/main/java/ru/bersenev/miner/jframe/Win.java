@@ -12,7 +12,7 @@ import javax.swing.*;
 
 /**
  *
- * @author я
+ * @author пїЅ
  */
 public class Win extends javax.swing.JFrame {
 
@@ -26,6 +26,8 @@ public class Win extends javax.swing.JFrame {
         UserService userService = new UserService();
 
         jLabel5.setText(Long.toString(userService.addResult(user , time)));
+
+       // jTextArea1.setText(userService.getTopWinUser(user));
     }
 
     /**
@@ -54,13 +56,13 @@ public class Win extends javax.swing.JFrame {
         jPanel1.setToolTipText("55555");
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Вы выиграли");
+        jLabel1.setText("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Ваш результат :");
+        jLabel2.setText("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ :");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -76,7 +78,7 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("Ваш лучший результат при данных настройках");
+        jLabel4.setText("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -91,7 +93,7 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 60);
         jPanel1.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("Лучшие игроки в при данных настройках");
+        jLabel6.setText("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;

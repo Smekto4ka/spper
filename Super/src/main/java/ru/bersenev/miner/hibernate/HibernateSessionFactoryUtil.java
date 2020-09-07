@@ -19,7 +19,7 @@ public class HibernateSessionFactoryUtil {
                 configuration.addAnnotatedClass(ReseltTable.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 //     configuration.getProperties() - мол настроить -  Properties — это параметры для работы hibernate, указанные в специальном файле hibernate.cfg.xml.
-                sessionFactory = configuration.buildSessionFactory();//builder.build());
+                sessionFactory = configuration.buildSessionFactory(builder.build());
 
             } catch (HibernateException e) {
                 System.out.println("Исключение!" + e);

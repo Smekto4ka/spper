@@ -26,7 +26,12 @@ UserService userService ;
         initComponents();
         startGame = true;
         userService = new UserService();
-
+        //Exception in thread "AWT-EventQueue-0" javax.persistence.PersistenceException: org.hibernate.HibernateException: Illegal attempt to associate a collection with two open sessions. Collection : [ru.bersenev.miner.hibernate.UsersTable.reseltTables#9999]
+      /*  UsersTable us = userService.userAuthorization("111");
+        us.deletResult();
+        System.out.println(us.toString());
+        userService.updateUser(us);
+*/
 
 
     }
@@ -131,6 +136,7 @@ UserService userService ;
              JOptionPane.showMessageDialog(null,"такого пользователя нет\nперепроверьте введенный ник", "Warning", JOptionPane.PLAIN_MESSAGE);
              return;
          }
+
 if (startGame){
     Window window = new Window();
     window.setWindow(window);

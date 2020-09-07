@@ -20,6 +20,9 @@ public void addUsers (UsersTable user){
        updateUser(user);
 
 }
+public void deletUser(UsersTable user){
+    userDao.deleteUser(user);
+}
 public void updateUser(UsersTable user){
        userDao.updateUser(user);
 }
@@ -38,6 +41,11 @@ public long addResult(UsersTable user , long time){
        user.addResult(new ReseltTable(user.getLength(),user.getKolBomb(),time));
     updateUser(user);
     return time;
-
 }
+/*
+public String getTopWinUser(UsersTable user){
+
+
+
+}*/
 }
