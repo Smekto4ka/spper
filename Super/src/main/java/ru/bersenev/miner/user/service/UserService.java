@@ -47,12 +47,28 @@ public class UserService {
         return new UserDao().addResult(user.getName(), new ReseltTable(user.getLength(), user.getKolBomb(), time));
     }
 
-public void getTopWinUser(User user){
-    List<ReseltTable> list = userDao.getResultData(user.getLength(),user.getKolBomb());
+    public String getTopWinUser(User user) {
+        List<ReseltTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
 
-    for(ReseltTable res : list){
-        System.out.println(res.getUser().getName() + " " + Long.toString(res.getTime()));
+        long time;
+        int nom;
+        String otvet = "";
+        for (int i = 0; i < 10 ; i++) {
+            if (list.size()==0){
+                break;
+            }
+            time = list.get(0).getTime();
+            nom = 0;
+
+            for (int j = 1 ; j < list.size() ; j ++) {
+                if(list.get(j).getTime()<time){
+                    nom = j;
+                    time = list.get(j).getTime();
+                }
+            }
+            otvet += "name : " + list.remove(nom).getUser().getName() + "\ntime (mc) : " +time+ "\n";
+        }
+return otvet;
+
     }
-
-}
 }

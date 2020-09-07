@@ -25,8 +25,8 @@ public class Win extends javax.swing.JFrame {
         UserService userService = new UserService();
         user = userService.addResult(user, time);
         jLabel5.setText(Long.toString(user.getTime()));
-        userService.getTopWinUser(user);
-        // jTextArea1.setText(userService.getTopWinUser(user));
+
+        jTextArea1.setText(userService.getTopWinUser(user));
     }
 
     /**
@@ -55,13 +55,13 @@ public class Win extends javax.swing.JFrame {
         jPanel1.setToolTipText("55555");
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        jLabel1.setText("Вы выиграли ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ :");
+        jLabel2.setText("Ваш результат : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -77,7 +77,7 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        jLabel4.setText("Ваш лучший результат при данных настройках ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -92,7 +92,7 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 60);
         jPanel1.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
+        jLabel6.setText("Лучшие игроки в при данных настройках ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
