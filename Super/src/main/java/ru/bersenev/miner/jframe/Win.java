@@ -5,13 +5,12 @@
  */
 package ru.bersenev.miner.jframe;
 
-import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import javax.swing.*;
 
 /**
- *
  * @author �
  */
 public class Win extends javax.swing.JFrame {
@@ -19,15 +18,15 @@ public class Win extends javax.swing.JFrame {
     /**
      * Creates new form Win
      */
-    public Win(UsersTable user, long time) {
+    public Win(User user, long time) {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jLabel3.setText(Long.toString(time));
         UserService userService = new UserService();
-
-        jLabel5.setText(Long.toString(userService.addResult(user , time)));
-
-       // jTextArea1.setText(userService.getTopWinUser(user));
+        user = userService.addResult(user, time);
+        jLabel5.setText(Long.toString(user.getTime()));
+        userService.getTopWinUser(user);
+        // jTextArea1.setText(userService.getTopWinUser(user));
     }
 
     /**
@@ -125,10 +124,10 @@ public class Win extends javax.swing.JFrame {
      */
    /* public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+     */
      /*   try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

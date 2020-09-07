@@ -5,19 +5,18 @@
  */
 package ru.bersenev.miner.jframe;
 
-import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import javax.swing.*;
 
 /**
- *
  * @author я
  */
 public class Users extends javax.swing.JFrame {
-private boolean startGame;
-private  Window linkWindow;
-UserService userService ;
+    private boolean startGame;
+    private Window linkWindow;
+    UserService userService;
 
     /**
      * Creates new form Users
@@ -35,11 +34,12 @@ UserService userService ;
 
 
     }
-    public Users(Window window){
+
+    public Users(Window window) {
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         startGame = false;
-        this.linkWindow=window;
+        this.linkWindow = window;
         userService = new UserService();
     }
 
@@ -130,28 +130,28 @@ UserService userService ;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         String name = jTextField1.getText();
-        UsersTable user  = userService.userAuthorization(name);
-         if (user==null){
-             JOptionPane.showMessageDialog(null,"такого пользователя нет\nперепроверьте введенный ник", "Warning", JOptionPane.PLAIN_MESSAGE);
-             return;
-         }
+        String name = jTextField1.getText();
+        User user = userService.userAuthorization(name);
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "такого пользователя нет\nперепроверьте введенный ник", "Warning", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
 
-if (startGame){
-    Window window = new Window();
-    window.setWindow(window);
-    window.setVisible(true);
-    window.start(user);
-}else{
-    linkWindow.start(user);
+        if (startGame) {
+            Window window = new Window();
+            window.setWindow(window);
+            window.setVisible(true);
+            window.start(user);
+        } else {
+            linkWindow.start(user);
 
-}
+        }
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (startGame)
-      new Registration().setVisible(true);
+            new Registration().setVisible(true);
         else
             new Registration(linkWindow).setVisible(true);
         dispose();
@@ -164,7 +164,7 @@ if (startGame){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -12,6 +12,8 @@
         <property name="dialect">org.hibernate.dialect.PostgreSQL91Dialect</property>
         <property name="show_sql">true</property>
 
+
+
         <property name="hbm2ddl.auto">update</property>
     </session-factory>
 </hibernate-configuration>

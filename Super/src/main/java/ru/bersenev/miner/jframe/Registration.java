@@ -6,6 +6,7 @@
 package ru.bersenev.miner.jframe;
 
 import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import javax.swing.*;
@@ -205,10 +206,10 @@ public class Registration extends javax.swing.JFrame {
             nomRadioButton=1;
         else
            nomRadioButton=2;
-        UsersTable user = new UsersTable(name,length,kolBomb,percent,nomRadioButton);
+
        // user.addResult(new ReseltTable());
-        userService.addUsers(user);
-       userService.updateUser(user);
+        User user = userService.addUsers(new UsersTable(name,length,kolBomb,percent,nomRadioButton));
+
         if (startGame){
             Window window = new Window();
             window.setWindow(window);

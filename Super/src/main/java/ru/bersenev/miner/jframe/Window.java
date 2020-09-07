@@ -6,6 +6,7 @@
 package ru.bersenev.miner.jframe;
 
 import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import java.awt.*;
@@ -20,7 +21,7 @@ private long time;
     private CastomButton[][] massButton;
     private boolean[][] booleanMassBomb;
     private int kolFlag;
-    private UsersTable user;
+    private User user;
     private Bomb[] objectMassBomb;
     private boolean permissionToPlay;
     private UserService userService;
@@ -40,7 +41,7 @@ userService = new UserService();
         this.window = window;
     }
 
-    public void start(UsersTable user) {
+    public void start(User user) {
         this.user = user;
         permissionToPlay = true;
         kolFlag = 0;

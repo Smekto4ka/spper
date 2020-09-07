@@ -8,7 +8,7 @@ package ru.bersenev.miner.jframe;
 //import com.sun.deploy.security.SelectableSecurityManager;
 
 
-import ru.bersenev.miner.hibernate.UsersTable;
+import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import javax.swing.*;
@@ -19,12 +19,12 @@ import java.awt.event.ActionEvent;
  */
 public class Settings extends javax.swing.JFrame {
     private Window windowGame;
-    private UsersTable users;
+    private User users;
 
     /**
      * Creates new form NewGame
      */
-    public Settings(Window windowGame, UsersTable users) {
+    public Settings(Window windowGame, User users) {
         this.users = users;
         this.users = users;
         this.windowGame = windowGame;

@@ -1,18 +1,29 @@
 package ru.bersenev.miner.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import org.hibernate.criterion.Restrictions;
+import ru.bersenev.miner.user.service.ConverterData;
+import ru.bersenev.miner.user.service.User;
 
 import java.util.List;
 
 public class UserDao {
 
-    public UsersTable findUserByName(String name) {
-       /* Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+
+    public User findUserByName(String name) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         UsersTable usersTable = session.get(UsersTable.class, name);
-        session.close();*/
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(UsersTable.class, name);
+        User user = null;
+        if (usersTable!=null) {
+            ConverterData converter = new ConverterData();
+            user = converter.converterUsersTable(usersTable);
+        }
+        session.close();
+
+        return user;    //HibernateSessionFactoryUtil.getSessionFactory().openSession().get(UsersTable.class, name);
     }
 
     public void saveUser(UsersTable user) {
@@ -26,21 +37,45 @@ public class UserDao {
         session.close();
     }
 
-    public void updateUser(UsersTable user) {
+    public void updateUser(User user) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
-       // <property name="hibernate.current_session_context_class">thread</property>
+        // <property name="hibernate.current_session_context_class">thread</property>
+        ConverterData converter = new ConverterData();
+        UsersTable usersTable = session.get(UsersTable.class, user.getName());
+        usersTable=converter.converterUser(user,usersTable);
+        Transaction tx1 = session.beginTransaction();
+        session.update(usersTable);
+        tx1.commit();
+        session.close();
+    }
+    public void updateUserTable(UsersTable user) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
+        // <property name="hibernate.current_session_context_class">thread</property>
         Transaction tx1 = session.beginTransaction();
         session.update(user);
         tx1.commit();
-      session.close();
+        session.close();
     }
+   public User addResult(String name, ReseltTable result){
+       Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+       UsersTable usersTable = session.get(UsersTable.class, name);
+       usersTable.addResult(result);
+       Transaction tx1 = session.beginTransaction();
+       session.update(usersTable);
+       tx1.commit();
 
-    public void deleteUser(UsersTable user) {
+User user = new ConverterData().converterUsersTable(usersTable);
+       session.close();
+       return user;
+   }
+
+    public void deleteUser(String name) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
+        UsersTable user = session.get(UsersTable.class, name);
         Transaction tx1 = session.beginTransaction();
         session.delete(user);
         tx1.commit();
-       session.close();
+        session.close();
     }
 
     public ReseltTable finnResultById(int id) {
@@ -48,12 +83,22 @@ public class UserDao {
     }
 
     public List<UsersTable> findUserAll() {
-        List<UsersTable> users = (List<UsersTable>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From UsersTable").list();
+        List<UsersTable> users = (List<UsersTable>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From UsersTable").list();
         return users;
     }
+
     public List<ReseltTable> findResultAll() {
-        List<ReseltTable> result = (List<ReseltTable>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From ReseltTable").list();
+        List<ReseltTable> result = (List<ReseltTable>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From ReseltTable").list();
         return result;
     }
 
+    public List<ReseltTable> getResultData(int length , int kolBomb){
+        Criteria criteria;
+
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
+
+       criteria = session.createCriteria(ReseltTable.class).add(Restrictions.eq("length", length)).add(Restrictions.eq("kolBomb", kolBomb));
+       return criteria.list();
+
+    }
 }
