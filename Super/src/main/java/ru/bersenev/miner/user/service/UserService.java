@@ -74,6 +74,7 @@ return otvet;*/
         for (int i = 0 ; i< 10 && i < list.size(); i++){
             otvet += "name : " + list.get(i).getUser().getName() + "\ntime (mc) : " +list.get(i).getTime()+ "\n";
         }
+
 return otvet;
     }
 }
