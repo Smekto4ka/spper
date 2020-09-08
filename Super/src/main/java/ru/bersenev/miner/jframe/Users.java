@@ -18,11 +18,13 @@ public class Users extends javax.swing.JFrame {
     private Window linkWindow;
     UserService userService;
 
+
     /**
      * Creates new form Users
      */
     public Users() {
         initComponents();
+        CentreWindow.centreWindow(this);
         startGame = true;
         userService = new UserService();
         //Exception in thread "AWT-EventQueue-0" javax.persistence.PersistenceException: org.hibernate.HibernateException: Illegal attempt to associate a collection with two open sessions. Collection : [ru.bersenev.miner.hibernate.UsersTable.reseltTables#9999]
@@ -37,6 +39,7 @@ public class Users extends javax.swing.JFrame {
 
     public Users(Window window) {
         initComponents();
+        CentreWindow.centreWindow(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         startGame = false;
         this.linkWindow = window;

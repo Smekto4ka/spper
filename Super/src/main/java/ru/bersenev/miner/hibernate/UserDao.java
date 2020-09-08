@@ -1,13 +1,17 @@
 package ru.bersenev.miner.hibernate;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import ru.bersenev.miner.user.service.ConverterData;
 import ru.bersenev.miner.user.service.User;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
+
 
 public class UserDao {
 
@@ -95,20 +99,23 @@ public class UserDao {
 
     public List getResultData(int length, int kolBomb) {
 
-        Criteria criteria;
+    /*    Criteria criteria;
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
 
        criteria = session.createCriteria(ReseltTable.class).add(Restrictions.eq("length", length)).add(Restrictions.eq("kolBomb", kolBomb));
-       return criteria.list();
+       return criteria.list();*/
 
-      /*  Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<ReseltTable> cr = cb.createQuery(ReseltTable.class);
         Root<ReseltTable> root = cr.from(ReseltTable.class);
-        cr.select(root).where(cb.like(root.<String>get("length"), Integer.toString(length)), cb.like(root.<String>get("kolBomb"), Integer.toString(kolBomb)));
+
+     //  cr.select(root).where(new Predicate[]{(cb.between(root.get("length"),  length,  length+1)), (cb.between(root.get("kolBomb"), kolBomb , kolBomb+1))});
+        cr.select(root).where((new Predicate[] {(cb.equal(root.get("length"), length)), (cb.equal(root.get("kolBomb"), kolBomb)) }));
         cr.orderBy(cb.asc(root.get("time")));
         Query query = session.createQuery(cr);
-        return query.getResultList();*/
+
+        return query.getResultList();
     }
 }

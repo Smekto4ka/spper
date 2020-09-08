@@ -48,7 +48,7 @@ public class UserService {
     }
 
     public String getTopWinUser(User user) {
-        List<ReseltTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
+    /*    List<ReseltTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
 
         long time;
         int nom;
@@ -68,7 +68,12 @@ public class UserService {
             }
             otvet += "name : " + list.remove(nom).getUser().getName() + "\ntime (mc) : " +time+ "\n";
         }
+return otvet;*/
+        String otvet = "";
+        List<ReseltTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
+        for (int i = 0 ; i< 10 && i < list.size(); i++){
+            otvet += "name : " + list.get(i).getUser().getName() + "\ntime (mc) : " +list.get(i).getTime()+ "\n";
+        }
 return otvet;
-
     }
 }

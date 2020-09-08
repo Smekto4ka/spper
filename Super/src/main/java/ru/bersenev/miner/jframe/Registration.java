@@ -25,6 +25,7 @@ public class Registration extends javax.swing.JFrame {
     public Registration() {
         startGame = true;
         initComponents();
+        CentreWindow.centreWindow(this);
         addButtonGroup();
         userService = new UserService();
     }
@@ -32,6 +33,7 @@ public class Registration extends javax.swing.JFrame {
     public Registration(Window windiw) {
         startGame = false;
         initComponents();
+        CentreWindow.centreWindow(this);
         addButtonGroup();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         linkWindow = windiw;

@@ -29,6 +29,7 @@ public class Settings extends javax.swing.JFrame {
         this.users = users;
         this.windowGame = windowGame;
         initComponents();
+        CentreWindow.centreWindow(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jSpinner1.setValue(users.getLength());
         if (users.getNomRadioButton() == 2)

@@ -20,6 +20,7 @@ public class Win extends javax.swing.JFrame {
      */
     public Win(User user, long time) {
         initComponents();
+        CentreWindow.centreWindow(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jLabel3.setText(Long.toString(time));
         UserService userService = new UserService();
@@ -105,7 +106,7 @@ public class Win extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setPreferredSize(new java.awt.Dimension(230, 310));
+        jTextArea1.setPreferredSize(new java.awt.Dimension(230, 320));
         jScrollPane1.setViewportView(jTextArea1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

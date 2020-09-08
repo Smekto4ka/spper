@@ -5,34 +5,34 @@
  */
 package ru.bersenev.miner.jframe;
 
-import ru.bersenev.miner.hibernate.UsersTable;
 import ru.bersenev.miner.user.service.User;
-import ru.bersenev.miner.user.service.UserService;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 // long start = System.currentTimeMillis();
+
 /**
  * @author ÿ
  */
 public class Window extends javax.swing.JFrame {
-private long time;
+    private long time;
     private CastomButton[][] massButton;
     private boolean[][] booleanMassBomb;
     private int kolFlag;
     private User user;
     private Bomb[] objectMassBomb;
     private boolean permissionToPlay;
-    private UserService userService;
 
 
     /**
      * Creates new form Window
      */
     public Window() {
-userService = new UserService();
+
         initComponents();
+        CentreWindow.centreWindow(this);
 
 
     }
@@ -312,10 +312,12 @@ userService = new UserService();
                     return;
                 }
             }
-             time = System.currentTimeMillis() - time;
+            if (permissionToPlay) {
+                time = System.currentTimeMillis() - time;
+            }
             jLabel1.setText("vi viigrali");
             permissionToPlay = false;
-            new Win(user,time).setVisible(true);
+            new Win(user, time).setVisible(true);
 
         } else {
             jLabel1.setText("kol bomb > flagov");

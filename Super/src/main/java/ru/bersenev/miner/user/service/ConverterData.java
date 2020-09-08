@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ConverterData {
     public User converterUsersTable(UsersTable usersTable) {
-        //List<ReseltTable> reseltTables= usersTable.getReseltTables();
+
 
         return new User(
                 usersTable.getName(),
