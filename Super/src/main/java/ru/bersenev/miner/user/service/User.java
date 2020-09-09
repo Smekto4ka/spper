@@ -8,19 +8,27 @@ public class User {
     private int kolBomb;
     private int percent;
     private int nomRadioButton;
-    private List<Result> reselt;
+    private List<Result> result;
 
-    public User(String name, int length, int kolBomb, int percent, int nomRadioButton,List<Result> reselt) {
+    public User(String name, int length, int kolBomb, int percent, int nomRadioButton,List<Result> result) {
         this.length = length;
         this.kolBomb = kolBomb;
         this.name = name;
         this.percent = percent;
         this.nomRadioButton = nomRadioButton;
-        this.reselt = reselt;
+        this.result = result;
+    }
+    public User(String name, int length, int kolBomb, int percent, int nomRadioButton) {
+        this.length = length;
+        this.kolBomb = kolBomb;
+        this.name = name;
+        this.percent = percent;
+        this.nomRadioButton = nomRadioButton;
+
     }
 
-    public List<Result> getReseltTables() {
-        return reselt;
+    public List<Result> getResultTables() {
+        return result;
     }
 
     public String getName() {
@@ -65,12 +73,12 @@ public class User {
 
 
 
-    public void setReselt(List<Result> reselt) {
-        this.reselt = reselt;
+    public void setResult(List<Result> result) {
+        this.result = result;
     }
     public long getTime(){
 
-        for(Result res : reselt){
+        for(Result res : result){
             if (res.getKolBomb() == kolBomb && res.getLength() == length){
                 return res.getTime();
             }

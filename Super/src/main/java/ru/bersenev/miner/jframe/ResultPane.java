@@ -6,28 +6,47 @@
 package ru.bersenev.miner.jframe;
 
 import ru.bersenev.miner.hibernate.UserDao;
+import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- *
  * @author ÿ
  */
 public class ResultPane extends javax.swing.JFrame {
 
-private UserService userService;
-    public ResultPane() {
+    private UserService userService = new UserService();
+    private User user;
+    private UserDao userDao = new UserDao();
+
+
+    public ResultPane(User user) {
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        CentreWindow.centreWindow(this);
+        this.user = user;
         initComponents();
-      //  userService = new UserService();
-initRadioButton();
+       userDao.findUserAll();
+        initRadioButton();
     }
-    public void initRadioButton(){
+    public ResultPane() {
+        CentreWindow.centreWindow(this);
+        initComponents();
+        userDao.findUserAll();
+        initRadioButton();
+    }
+
+    public void initRadioButton() {
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioButton1);
         group.add(jRadioButton2);
         jRadioButton1.setSelected(true);
+      /*  JScrollPane scrollPane = new JScrollPane();
+        UserTableModel tableModel = new UserTableModel(userDao.findResultAll());
+        JTable table = new JTable(tableModel);
+        scrollPane.setViewportView(table);
+        jPanel3.add(scrollPane, BorderLayout.CENTER);*/
     }
   /*  JScrollPane scrollPane = new JScrollPane();
     UserTableModel tableModel = new UserTableModel(new UserDao().findUserAll());
@@ -76,6 +95,7 @@ initRadioButton();
         gridBagConstraints.gridy = 1;
         jPanel2.add(jLabel2, gridBagConstraints);
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jSpinner1.setPreferredSize(new java.awt.Dimension(70, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -128,16 +148,28 @@ initRadioButton();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-if (jRadioButton1.isSelected()){
-    jPanel3.removeAll();
-    JScrollPane scrollPane = new JScrollPane();
-    UserTableModel tableModel = new UserTableModel(new UserDao().findResultAll());
-    JTable table = new JTable(tableModel);
-    scrollPane.setViewportView(table);
-    jPanel3.add(scrollPane, BorderLayout.CENTER);
-}else{
+        jPanel3.removeAll();
+        JScrollPane scrollPane = new JScrollPane();
+        UserTableModel tableModel = null;
+        JTable table;
+        if (jRadioButton1.isSelected()) {
+            if (!jCheckBox1.isSelected()) {
+                tableModel = new UserTableModel(userDao.getResult());
+            }else {
+              //  tableModel = new UserTableModel(userDao.);
+            }
+        }else{
+            if (!jCheckBox1.isSelected()){
 
-}
+               // tableModel = new UserTableModel(userDao.);
+            } else {
+
+              //  tableModel = new UserTableModel(userService.getTopUser(user , (Integer) jSpinner1.getValue()));
+          }
+        }
+        table = new JTable(tableModel);
+        scrollPane.setViewportView(table);
+        jPanel3.add(scrollPane, BorderLayout.CENTER);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -147,7 +179,7 @@ if (jRadioButton1.isSelected()){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

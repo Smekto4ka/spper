@@ -1,23 +1,21 @@
 package ru.bersenev.miner.jframe;
 
-import ru.bersenev.miner.hibernate.ResultTable;
-
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class UserTableModel extends AbstractTableModel {
 
-    private final String[] header = {"name", "kol igr"};
+    private final String[] header = {"name"," kolPob " , "time"};
 
-    private List<ResultTable> dataList;
+    private List<Object[]> resultList;
 
-    public UserTableModel(List<ResultTable> userList) {
-        this.dataList = userList;
+    public UserTableModel(List<Object[]> userList) {
+        this.resultList = userList;
     }
 
     @Override
     public int getRowCount() {
-        return this.dataList.size();
+        return this.resultList.size();
     }
 
     @Override
@@ -27,13 +25,7 @@ public class UserTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (columnIndex == 0) {
-            return dataList.get(rowIndex).getUser().getName();
-        }
-        if (columnIndex == 1) {
-            return dataList.get(rowIndex).getUser().getResultTables().size();
-        }
-        return null;
+        return  resultList.get(rowIndex)[columnIndex];
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import ru.bersenev.miner.user.service.ConverterData;
+import ru.bersenev.miner.user.service.Result;
 import ru.bersenev.miner.user.service.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -86,16 +87,27 @@ public class UserDao {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(ResultTable.class, id);
     }
 
-    public List<UsersTable> findUserAll() {
+   /* public List<UsersTable> findUserAll() {
         List<UsersTable> from_usersTable = HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From UsersTable").list();
         return from_usersTable;
-    }
+    }*/
 
-    public List<ResultTable> findResultAll() {
+    public List<Result> findResultAll() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         List<ResultTable> fromResultTable = session.createQuery("From ResultTable").list();
-     //   session.close();
-        return fromResultTable;
+        ConverterData converter = new ConverterData();
+        List<Result> result = converter.converterResultTable(fromResultTable);
+        session.close();
+        return result;
+    }
+
+    public List<User> findUserAll() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<UsersTable> fromUsersTable = session.createQuery("From UsersTable").list();
+        ConverterData converter = new ConverterData();
+        List<User> result = converter.converterUsersTable(fromUsersTable);
+        session.close();
+        return result;
     }
 /*
     public List<ResultTable> findTopResult(){
@@ -108,17 +120,26 @@ public class UserDao {
         return resultList;
     }*/
 
-    public List getResultData(int length, int kolBomb) {
+    public List<Result> getResultData(int length, int kolBomb) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<ResultTable> cr = cb.createQuery(ResultTable.class);
         Root<ResultTable> root = cr.from(ResultTable.class);
-
-     //  cr.select(root).where(new Predicate[]{(cb.between(root.get("length"),  length,  length+1)), (cb.between(root.get("kolBomb"), kolBomb , kolBomb+1))});
         cr.select(root).where((cb.equal(root.get("length"), length)), (cb.equal(root.get("kolBomb"), kolBomb)));
         cr.orderBy(cb.asc(root.get("time")));
         Query query = session.createQuery(cr);
-session.close();
-        return query.getResultList();
+        List result = new ConverterData().converterResultTable(query.getResultList());
+
+        session.close();
+        return result;
+    }
+    public List<Object[]> getResult(){
+        Session session =  HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List resultList = session.createQuery(
+                "select r.user.name , count(r.user.name) , sum(r.time) from ResultTable r group by r.user.name " )
+
+                .getResultList();
+        session.close();
+        return resultList;
     }
 }

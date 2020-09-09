@@ -5,15 +5,23 @@ public class Result {
     private int length;
     private int kolBomb;
     private long time;
-    private String user;
+    private User user;
 
 
-    public Result(int id,int length, int kolBomb, long time, String user){
+
+    public Result(int id,int length, int kolBomb, long time, User user){
         this.id = id;
         this.length=length;
         this.kolBomb = kolBomb;
         this.time = time;
         this.user = user;
+    }
+    public Result(int id,int length, int kolBomb, long time){
+        this.id = id;
+        this.length=length;
+        this.kolBomb = kolBomb;
+        this.time = time;
+
     }
 
     public int getId() {
@@ -36,11 +44,11 @@ public class Result {
         this.time = time;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

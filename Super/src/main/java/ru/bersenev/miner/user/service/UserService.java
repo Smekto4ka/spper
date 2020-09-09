@@ -4,6 +4,7 @@ import ru.bersenev.miner.hibernate.ResultTable;
 import ru.bersenev.miner.hibernate.UserDao;
 import ru.bersenev.miner.hibernate.UsersTable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -34,7 +35,7 @@ public class UserService {
 
     public User addResult(User user, long time) {
 
-        for (Result reseltTable : user.getReseltTables()) {
+        for (Result reseltTable : user.getResultTables()) {
             if (reseltTable.getKolBomb() == user.getKolBomb() && reseltTable.getLength() == user.getLength()) {
                 if (reseltTable.getTime() > time) {
                     reseltTable.setTime(time);
@@ -50,12 +51,24 @@ public class UserService {
     public String getTopWinUser(User user) {
 
         String otvet = "";
-        List<ResultTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
+        List<Result> list = userDao.getResultData(user.getLength(), user.getKolBomb());
         for (int i = 0; i < 10 && i < list.size(); i++) {
             otvet += "name : " + list.get(i).getUser().getName() + "\ntime (mc) : " + list.get(i).getTime() + "\n";
         }
 
         return otvet;
+    }
+
+    public List<Result> getTopUser(User user, int kol) {
+
+        List<Result> list = userDao.getResultData(user.getLength(), user.getKolBomb());
+
+        List<Result> result = new ArrayList();
+        for (int i = 0; i < kol && i < list.size(); i++) {
+         result.add(list.get(i));
+        }
+
+        return result;
     }
     public void getResultsPerClient(){
 
