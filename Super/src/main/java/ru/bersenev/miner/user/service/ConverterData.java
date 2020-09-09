@@ -1,6 +1,6 @@
 package ru.bersenev.miner.user.service;
 
-import ru.bersenev.miner.hibernate.ReseltTable;
+import ru.bersenev.miner.hibernate.ResultTable;
 import ru.bersenev.miner.hibernate.UsersTable;
 
 import java.util.ArrayList;
@@ -16,17 +16,17 @@ public class ConverterData {
                 usersTable.getKolBomb(),
                 usersTable.getPercent(),
                 usersTable.getNomRadioButton(),
-                converterResultTable(usersTable.getReseltTables(), usersTable.getName())
+                converterResultTable(usersTable.getResultTables(), usersTable.getName())
         );
     }
 
-    private List<Result> converterResultTable(List<ReseltTable> reseltTable, String name) {
+    private List<Result> converterResultTable(List<ResultTable> resultTable, String name) {
         // if (reseltTable instanceof ArrayList){
         List<Result> results = new ArrayList<Result>();
       /* }else{
            List<Result> results = new List<Result>();
        }*/
-        for (ReseltTable res : reseltTable) {
+        for (ResultTable res : resultTable) {
 
                 results.add(new Result(
                         res.getId(),
@@ -45,10 +45,10 @@ public class ConverterData {
         usersTable.setKolBomb(user.getKolBomb());
         usersTable.setNomRadioButton(user.getNomRadioButton());
         usersTable.setPercent(user.getPercent());
-        List<ReseltTable> resTab = usersTable.getReseltTables();
+        List<ResultTable> resTab = usersTable.getResultTables();
         List<Result> res = user.getReseltTables();
 
-        for ( int i = 0 ; i< usersTable.getReseltTables().size(); i ++){
+        for (int i = 0; i< usersTable.getResultTables().size(); i ++){
             if (resTab.get(i).getTime()!=res.get(i).getTime() ){
                 resTab.get(i).setTime(res.get(i).getTime());
             }

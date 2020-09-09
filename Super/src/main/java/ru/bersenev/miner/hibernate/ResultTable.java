@@ -4,7 +4,7 @@ import javax.persistence.*;
 // long start = System.currentTimeMillis();
 @Entity
 @Table(name = "result")
-public class ReseltTable {
+public class ResultTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +17,12 @@ public class ReseltTable {
     private int kolBomb;
     @Column (name = "time")
     private long time;
-    @ManyToOne(fetch = FetchType.LAZY)//LAZY)//EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)//LAZY)//EAGER)
     @JoinColumn(name = "user_name")
     private UsersTable user;
 
-    public ReseltTable(){}
-    public ReseltTable(int length, int kolBomb, long time){
+    public ResultTable(){}
+    public ResultTable(int length, int kolBomb, long time){
         this.length=length;
         this.kolBomb = kolBomb;
         this.time = time;

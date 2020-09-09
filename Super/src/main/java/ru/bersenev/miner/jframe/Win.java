@@ -41,6 +41,7 @@ public class Win extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        infoPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,71 +52,70 @@ public class Win extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.FlowLayout());
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setToolTipText("55555");
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        infoPanel.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Вы выиграли ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jLabel1, gridBagConstraints);
+        infoPanel.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("Ваш результат : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        gridBagConstraints.insets = new java.awt.Insets(10, 100, 10, 10);
-        jPanel1.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        infoPanel.add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("444");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jLabel3, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        infoPanel.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("Ваш лучший результат при данных настройках ");
+        jLabel4.setText("<html>Ваш лучший результат<br>при данных настройках</html>");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jLabel4, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+        infoPanel.add(jLabel4, gridBagConstraints);
 
         jLabel5.setText("333");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 60);
-        jPanel1.add(jLabel5, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        infoPanel.add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Лучшие игроки в при данных настройках ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel1.add(jLabel6, gridBagConstraints);
+        infoPanel.add(jLabel6, gridBagConstraints);
+
+        jPanel1.add(infoPanel, java.awt.BorderLayout.NORTH);
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 100));
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setPreferredSize(new java.awt.Dimension(230, 320));
+        jTextArea1.setPreferredSize(new java.awt.Dimension(230, 310));
         jScrollPane1.setViewportView(jTextArea1);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 3;
-        jPanel1.add(jScrollPane1, gridBagConstraints);
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -156,6 +156,7 @@ public class Win extends javax.swing.JFrame {
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -4,11 +4,16 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс сущности таблицы User
+ */
 @Entity
 @Table (name = "users")
-
 public class UsersTable {
 
+    /**
+     *
+     */
     @Id
     @Column(name = "name")
     private String name;
@@ -26,22 +31,29 @@ public class UsersTable {
     private int nomRadioButton;
 
     @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReseltTable> reseltTables;
+    private List<ResultTable> resultTables = new ArrayList<ResultTable>();
 
     public UsersTable(){}
 
+    /**
+     * @param name имя пользователя
+     * @param length
+     * @param kolBomb
+     * @param percent
+     * @param nomRadioButton
+     */
     public UsersTable(String name, int length, int kolBomb, int percent, int nomRadioButton){
         this.length=length;
         this.kolBomb=kolBomb;
         this.name=name;
         this.percent = percent;
         this.nomRadioButton = nomRadioButton;
-        reseltTables = new ArrayList();
+        resultTables = new ArrayList();
     }
 
-    public void addResult(ReseltTable result){
+    public void addResult(ResultTable result){
         result.setUser(this);
-        reseltTables.add(result);
+        resultTables.add(result);
     }
 
     public String getName() {
@@ -80,15 +92,15 @@ public class UsersTable {
         this.nomRadioButton = nomRadioButton;
     }
 
-    public List<ReseltTable> getReseltTables() {
-        return reseltTables;
+    public List<ResultTable> getResultTables() {
+        return resultTables;
     }
 
-    public void setReseltTables(List<ReseltTable> reseltTables) {
-        this.reseltTables = reseltTables;
+    public void setResultTables(List<ResultTable> resultTables) {
+        this.resultTables = resultTables;
     }
     public void deletResult(){
-        reseltTables.removeAll(reseltTables);
+        resultTables.removeAll(resultTables);
     }
 
     @Override
@@ -97,6 +109,6 @@ public class UsersTable {
                 "\nSettings :\n"+
                 "length : "+ length +
                 "\nkolBomb : " + kolBomb +
-                "\nkol record :" + reseltTables.size();
+                "\nkol record :" + resultTables.size();
     }
 }

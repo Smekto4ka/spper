@@ -8,7 +8,6 @@ import ru.bersenev.miner.user.service.User;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class UserDao {
         session.close();
     }
 
-    public User addResult(String name, ReseltTable result) {
+    public User addResult(String name, ResultTable result) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         UsersTable usersTable = session.get(UsersTable.class, name);
         usersTable.addResult(result);
@@ -83,39 +82,43 @@ public class UserDao {
         session.close();
     }
 
-    public ReseltTable finnResultById(int id) {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(ReseltTable.class, id);
+    public ResultTable finnResultById(int id) {
+        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(ResultTable.class, id);
     }
 
     public List<UsersTable> findUserAll() {
-        List<UsersTable> users = (List<UsersTable>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From UsersTable").list();
-        return users;
+        List<UsersTable> from_usersTable = HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From UsersTable").list();
+        return from_usersTable;
     }
 
-    public List<ReseltTable> findResultAll() {
-        List<ReseltTable> result = (List<ReseltTable>) HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From ReseltTable").list();
-        return result;
+    public List<ResultTable> findResultAll() {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<ResultTable> fromResultTable = session.createQuery("From ResultTable").list();
+     //   session.close();
+        return fromResultTable;
     }
+/*
+    public List<ResultTable> findTopResult(){
+        Session session =  HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<ResultTable> resultList = session.createQuery(
+                "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+
+                .setMaxResults(10).getResultList();
+        session.close();
+        return resultList;
+    }*/
 
     public List getResultData(int length, int kolBomb) {
-
-    /*    Criteria criteria;
-
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
-
-       criteria = session.createCriteria(ReseltTable.class).add(Restrictions.eq("length", length)).add(Restrictions.eq("kolBomb", kolBomb));
-       return criteria.list();*/
-
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();//getCurrentSession();//.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<ReseltTable> cr = cb.createQuery(ReseltTable.class);
-        Root<ReseltTable> root = cr.from(ReseltTable.class);
+        CriteriaQuery<ResultTable> cr = cb.createQuery(ResultTable.class);
+        Root<ResultTable> root = cr.from(ResultTable.class);
 
      //  cr.select(root).where(new Predicate[]{(cb.between(root.get("length"),  length,  length+1)), (cb.between(root.get("kolBomb"), kolBomb , kolBomb+1))});
-        cr.select(root).where((new Predicate[] {(cb.equal(root.get("length"), length)), (cb.equal(root.get("kolBomb"), kolBomb)) }));
+        cr.select(root).where((cb.equal(root.get("length"), length)), (cb.equal(root.get("kolBomb"), kolBomb)));
         cr.orderBy(cb.asc(root.get("time")));
         Query query = session.createQuery(cr);
-
+session.close();
         return query.getResultList();
     }
 }

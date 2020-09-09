@@ -16,7 +16,7 @@ public class HibernateSessionFactoryUtil {
             try {
                 Configuration configuration = new Configuration().configure();//"hibernate.cfg.xml");
                 configuration.addAnnotatedClass(UsersTable.class);// передаем наши классы в конфигуратор
-                configuration.addAnnotatedClass(ReseltTable.class);
+                configuration.addAnnotatedClass(ResultTable.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 //     configuration.getProperties() - мол настроить -  Properties — это параметры для работы hibernate, указанные в специальном файле hibernate.cfg.xml.
                 sessionFactory = configuration.buildSessionFactory(builder.build());

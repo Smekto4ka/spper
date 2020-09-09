@@ -1,6 +1,6 @@
 package ru.bersenev.miner.user.service;
 
-import ru.bersenev.miner.hibernate.ReseltTable;
+import ru.bersenev.miner.hibernate.ResultTable;
 import ru.bersenev.miner.hibernate.UserDao;
 import ru.bersenev.miner.hibernate.UsersTable;
 
@@ -44,37 +44,20 @@ public class UserService {
                 return user;
             }
         }
-        return new UserDao().addResult(user.getName(), new ReseltTable(user.getLength(), user.getKolBomb(), time));
+        return new UserDao().addResult(user.getName(), new ResultTable(user.getLength(), user.getKolBomb(), time));
     }
 
     public String getTopWinUser(User user) {
-    /*    List<ReseltTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
 
-        long time;
-        int nom;
         String otvet = "";
-        for (int i = 0; i < 10 ; i++) {
-            if (list.size()==0){
-                break;
-            }
-            time = list.get(0).getTime();
-            nom = 0;
-
-            for (int j = 1 ; j < list.size() ; j ++) {
-                if(list.get(j).getTime()<time){
-                    nom = j;
-                    time = list.get(j).getTime();
-                }
-            }
-            otvet += "name : " + list.remove(nom).getUser().getName() + "\ntime (mc) : " +time+ "\n";
-        }
-return otvet;*/
-        String otvet = "";
-        List<ReseltTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
-        for (int i = 0 ; i< 10 && i < list.size(); i++){
-            otvet += "name : " + list.get(i).getUser().getName() + "\ntime (mc) : " +list.get(i).getTime()+ "\n";
+        List<ResultTable> list = userDao.getResultData(user.getLength(), user.getKolBomb());
+        for (int i = 0; i < 10 && i < list.size(); i++) {
+            otvet += "name : " + list.get(i).getUser().getName() + "\ntime (mc) : " + list.get(i).getTime() + "\n";
         }
 
-return otvet;
+        return otvet;
+    }
+    public void getResultsPerClient(){
+
     }
 }
