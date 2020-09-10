@@ -11,7 +11,7 @@ import ru.bersenev.miner.user.service.UserService;
 import javax.swing.*;
 
 /**
- * @author я
+ * @author пїЅ
  */
 public class Users extends javax.swing.JFrame {
     private boolean startGame;
@@ -70,13 +70,13 @@ public class Users extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Добро пожаловать.");
+        jLabel1.setText("Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ.");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Введите ник:");
+        jLabel2.setText("Р’РІРµРґРёС‚Рµ РЅРёРє:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -93,7 +93,7 @@ public class Users extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jTextField1, gridBagConstraints);
 
-        jButton1.setText("Авторизация");
+        jButton1.setText("РђРІС‚РѕСЂРёР·РёСЂРѕРІР°С‚СЊСЃСЏ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -106,7 +106,7 @@ public class Users extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 70, 10, 10);
         jPanel1.add(jButton1, gridBagConstraints);
 
-        jLabel3.setText("Авторизируйтесь. Если вы впервые, то нажмите кнопку регистрации.");
+        jLabel3.setText("РђРІС‚РѕСЂРёР·РёСЂСѓР№С‚РµСЃСЊ. Р•СЃР»Рё РІС‹ РІРїРµСЂРІС‹Рµ, С‚Рѕ РЅР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ СЂРµРіРёСЃС‚СЂР°С†РёРё.");
         jLabel3.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -114,7 +114,7 @@ public class Users extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jButton2.setText("Регистрация");
+        jButton2.setText("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -136,7 +136,7 @@ public class Users extends javax.swing.JFrame {
         String name = jTextField1.getText();
         User user = userService.userAuthorization(name);
         if (user == null) {
-            JOptionPane.showMessageDialog(null, "такого пользователя нет\nперепроверьте введенный ник", "Warning", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "РўР°РєРѕР№ РЅРёРє СЃСѓС‰РµСЃС‚РІСѓРµС‚\n РїСЂРёРґСѓРјР°Р№С‚Рµ РґСЂСѓРіРѕР№", "Warning", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 

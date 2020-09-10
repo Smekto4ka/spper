@@ -15,7 +15,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * @author я
+ * @author СЏ
  */
 public class Settings extends javax.swing.JFrame {
     private Window windowGame;
@@ -77,7 +77,7 @@ public class Settings extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("введите ширину поля:");
+        jLabel1.setText("РІРІРµРґРёС‚Рµ С€РёСЂРёРЅСѓ РїРѕР»СЏ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -95,7 +95,7 @@ public class Settings extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jSpinner1, gridBagConstraints);
 
-        jLabel2.setText("введите количество бомб ( < 30%):");
+        jLabel2.setText("РІРІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРјР± ( < 30%):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -103,7 +103,7 @@ public class Settings extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jRadioButton1.setText("количество бомб задается в процентах");
+        jRadioButton1.setText("РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРјР± Р·Р°РґР°РµС‚СЃСЏ РІ РїСЂРѕС†РµРЅС‚Р°С…");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -115,7 +115,7 @@ public class Settings extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jRadioButton1, gridBagConstraints);
 
-        jRadioButton2.setText("количество бомб задается числом");
+        jRadioButton2.setText("РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРјР± Р·Р°РґР°РµС‚СЃСЏ С‡РёСЃР»РѕРј");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;

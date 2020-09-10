@@ -77,12 +77,17 @@ public class User {
         this.result = result;
     }
     public long getTime(){
-
+boolean bool= true;
+long time = 0;
         for(Result res : result){
             if (res.getKolBomb() == kolBomb && res.getLength() == length){
-                return res.getTime();
+               if ( bool){
+                   time = res.getTime();
+                   bool = false;
+               }
+                time = res.getTime();
             }
         }
-        return 0;
+        return time;
     }
 }

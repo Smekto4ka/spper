@@ -4,7 +4,6 @@ import ru.bersenev.miner.hibernate.ResultTable;
 import ru.bersenev.miner.hibernate.UserDao;
 import ru.bersenev.miner.hibernate.UsersTable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
@@ -34,43 +33,38 @@ public class UserService {
     }
 
     public User addResult(User user, long time) {
-
-        for (Result reseltTable : user.getResultTables()) {
-            if (reseltTable.getKolBomb() == user.getKolBomb() && reseltTable.getLength() == user.getLength()) {
-                if (reseltTable.getTime() > time) {
-                    reseltTable.setTime(time);
-                    updateUser(user);
-
-                }
-                return user;
-            }
-        }
         return new UserDao().addResult(user.getName(), new ResultTable(user.getLength(), user.getKolBomb(), time));
     }
 
-    public String getTopWinUser(User user) {
-
-        String otvet = "";
-        List<Result> list = userDao.getResultData(user.getLength(), user.getKolBomb());
-        for (int i = 0; i < 10 && i < list.size(); i++) {
-            otvet += "name : " + list.get(i).getUser().getName() + "\ntime (mc) : " + list.get(i).getTime() + "\n";
+    public String getTopWinUser(User user, int kolData) {
+        StringBuilder str = new StringBuilder();
+        List<Object[]> listResult = userDao.getTopWinResult(user, kolData);
+        for (Object[] mass : listResult) {
+            for (Object objekt : mass) {
+                str.append(objekt).append("\n");
+            }
         }
 
-        return otvet;
+        return str.toString();
     }
 
-    public List<Result> getTopUser(User user, int kol) {
+    public String getMinResult(User user) {
+        return userDao.getMinTime(user);
+    }
+
+  /*  public List<Result> getTopUser(User user, int kol) {
 
         List<Result> list = userDao.getResultData(user.getLength(), user.getKolBomb());
 
         List<Result> result = new ArrayList();
         for (int i = 0; i < kol && i < list.size(); i++) {
-         result.add(list.get(i));
+            result.add(list.get(i));
         }
 
         return result;
     }
-    public void getResultsPerClient(){
 
-    }
+    public void getResultsPerClient() {
+
+    }*/
 }

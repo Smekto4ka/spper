@@ -5,8 +5,6 @@ import java.util.List;
 
 public class UserTableModel extends AbstractTableModel {
 
-    private final String[] header = {"name"," kolPob " , "time"};
-
     private List<Object[]> resultList;
 
     public UserTableModel(List<Object[]> userList) {
@@ -20,7 +18,7 @@ public class UserTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return this.header.length;
+        return Column.values().length;
     }
 
     @Override
@@ -30,7 +28,34 @@ public class UserTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        return header[column];
+        return Column.values()[column].getStr();
     }
+
+
+    private enum Column {
+        NAME("ник"),
+        KOL_POB("кол побед"),
+        TIME("время");
+
+        private String str;
+
+        Column(String str) {
+            this.str = str;
+
+        }
+
+        public String getStr() {
+            return str;
+
+        }
+
+        @Override
+        public String toString() {
+            return str;
+        }
+    }
+
 }
+
+
 

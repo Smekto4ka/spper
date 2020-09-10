@@ -6,48 +6,49 @@
 package ru.bersenev.miner.jframe;
 
 import ru.bersenev.miner.hibernate.UserDao;
-import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * @author я
+ * @author СЏ
  */
 public class ResultPane extends javax.swing.JFrame {
 
     private UserService userService = new UserService();
-    private User user;
+
     private UserDao userDao = new UserDao();
 
 
-    public ResultPane(User user) {
+    public ResultPane() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         CentreWindow.centreWindow(this);
-        this.user = user;
+
         initComponents();
        userDao.findUserAll();
-        initRadioButton();
-    }
-    public ResultPane() {
-        CentreWindow.centreWindow(this);
-        initComponents();
-        userDao.findUserAll();
-        initRadioButton();
+       resultTable();
+
     }
 
-    public void initRadioButton() {
-        ButtonGroup group = new ButtonGroup();
-        group.add(jRadioButton1);
-        group.add(jRadioButton2);
-        jRadioButton1.setSelected(true);
+
+    private void resultTable (){
+        jPanel3.removeAll();
+        JScrollPane scrollPane = new JScrollPane();
+        UserTableModel tableModel = new UserTableModel(userDao.getResult());
+        JTable table = new JTable(tableModel);
+        scrollPane.setViewportView(table);
+        jPanel3.add(scrollPane, BorderLayout.CENTER);
+        jPanel3.revalidate();
+        jPanel3.repaint();
+    }
+
       /*  JScrollPane scrollPane = new JScrollPane();
         UserTableModel tableModel = new UserTableModel(userDao.findResultAll());
         JTable table = new JTable(tableModel);
         scrollPane.setViewportView(table);
         jPanel3.add(scrollPane, BorderLayout.CENTER);*/
-    }
+
   /*  JScrollPane scrollPane = new JScrollPane();
     UserTableModel tableModel = new UserTableModel(new UserDao().findUserAll());
     JTable table = new JTable(tableModel);
@@ -68,20 +69,14 @@ public class ResultPane extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 300));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setBackground(new java.awt.Color(240, 140, 240));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 100));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
@@ -89,52 +84,15 @@ public class ResultPane extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
         jPanel2.add(jLabel1, new java.awt.GridBagConstraints());
 
-        jLabel2.setText("jLabel2");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        jPanel2.add(jLabel2, gridBagConstraints);
-
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        jSpinner1.setPreferredSize(new java.awt.Dimension(70, 25));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        jPanel2.add(jSpinner1, gridBagConstraints);
-
-        jLabel3.setText("укажите число пользователей");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        jPanel2.add(jLabel3, gridBagConstraints);
-
-        jCheckBox1.setText("учитывать Ваши настройки");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        jPanel2.add(jCheckBox1, gridBagConstraints);
-
-        jRadioButton1.setText("показать все результаты");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        jPanel2.add(jRadioButton1, gridBagConstraints);
-
-        jRadioButton2.setText("фильтровать");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        jPanel2.add(jRadioButton2, gridBagConstraints);
-
-        jButton1.setText("выдать результат");
+        jButton1.setText("обновить");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
         jPanel2.add(jButton1, gridBagConstraints);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_START);
@@ -148,28 +106,7 @@ public class ResultPane extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jPanel3.removeAll();
-        JScrollPane scrollPane = new JScrollPane();
-        UserTableModel tableModel = null;
-        JTable table;
-        if (jRadioButton1.isSelected()) {
-            if (!jCheckBox1.isSelected()) {
-                tableModel = new UserTableModel(userDao.getResult());
-            }else {
-              //  tableModel = new UserTableModel(userDao.);
-            }
-        }else{
-            if (!jCheckBox1.isSelected()){
-
-               // tableModel = new UserTableModel(userDao.);
-            } else {
-
-              //  tableModel = new UserTableModel(userService.getTopUser(user , (Integer) jSpinner1.getValue()));
-          }
-        }
-        table = new JTable(tableModel);
-        scrollPane.setViewportView(table);
-        jPanel3.add(scrollPane, BorderLayout.CENTER);
+      resultTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -209,16 +146,10 @@ public class ResultPane extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }
 

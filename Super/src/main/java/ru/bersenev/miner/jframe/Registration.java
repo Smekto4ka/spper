@@ -12,7 +12,7 @@ import ru.bersenev.miner.user.service.UserService;
 import javax.swing.*;
 
 /**
- * @author я
+ * @author пїЅ
  */
 public class Registration extends javax.swing.JFrame {
     private boolean startGame;
@@ -76,13 +76,13 @@ public class Registration extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Вы в окне регистрации , заполните поля:");
+        jLabel1.setText("Р’С‹ РІ РѕРєРЅРµ СЂРµРіРёСЃС‚СЂР°С†РёРё , Р·Р°РїРѕР»РЅРёС‚Рµ РїРѕР»СЏ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Ваш игровой ник:");
+        jLabel2.setText("Р’Р°С€ РёРіСЂРѕРІРѕР№ РЅРёРє:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -90,7 +90,7 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setText("Размер поля:");
+        jLabel3.setText("Р Р°Р·РјРµСЂ РїРѕР»СЏ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -98,7 +98,7 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("введите количество бомб ( < 30%):");
+        jLabel4.setText("РІРІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРјР± ( < 30%):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -115,21 +115,21 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jTextField1, gridBagConstraints);
 
-        jRadioButton1.setText("количество бомб задается в процентах");
+        jRadioButton1.setText("РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРјР± Р·Р°РґР°РµС‚СЃСЏ РІ РїСЂРѕС†РµРЅС‚Р°С…");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jRadioButton1, gridBagConstraints);
 
-        jRadioButton2.setText("количество бомб задается числом");
+        jRadioButton2.setText("РєРѕР»РёС‡РµСЃС‚РІРѕ Р±РѕРјР± Р·Р°РґР°РµС‚СЃСЏ С‡РёСЃР»РѕРј");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 50);
         jPanel1.add(jRadioButton2, gridBagConstraints);
 
-        jLabel6.setText("Введите значение:");
+        jLabel6.setText("Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -137,7 +137,7 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel6, gridBagConstraints);
 
-        jButton1.setText("Зарегистрироваться");
+        jButton1.setText("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -182,7 +182,7 @@ public class Registration extends javax.swing.JFrame {
 
 
         if (userService.userAuthorization(name) != null) {
-            JOptionPane.showMessageDialog(null, "такой пользователь существует\nвыберете другой ник", "Warning", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "С‚Р°РєРѕР№ РЅРёРє СЃСѓС‰РµСЃС‚РІСѓРµС‚, РїСЂРёРґСѓРјР°Р№С‚Рµ РґСЂСѓРіРѕР№", "Warning", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 

@@ -14,7 +14,7 @@ import java.util.Random;
 // long start = System.currentTimeMillis();
 
 /**
- * @author ÿ
+ * @author ?
  */
 public class Window extends javax.swing.JFrame {
     private long time;
@@ -47,9 +47,9 @@ public class Window extends javax.swing.JFrame {
         kolFlag = 0;
 
         objectMassBomb = new Bomb[user.getKolBomb()];
-        jLabel3.setText("êîëè÷åñòâî áîìá íà ïîëå : " + Integer.toString(user.getKolBomb()));
+        jLabel3.setText("ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð±Ð¾Ð¼Ð± Ð½Ð° Ð¿Ð¾Ð»Ðµ : " + Integer.toString(user.getKolBomb()));
         jPanel2.removeAll();
-        jLabel2.setText("êîëè÷åñòâî ôëàãîâ : " + Integer.toString(kolFlag));
+        jLabel2.setText("ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ„Ð»Ð°Ð³Ð¾Ð² : " + Integer.toString(kolFlag));
         jLabel1.setText("-");
 
         initBomb();
@@ -121,7 +121,7 @@ public class Window extends javax.swing.JFrame {
             if ((button.getText()).equals("*")) {
                 button.setText("#");
                 kolFlag++;
-                jLabel2.setText("êîëè÷åñòâî ôëàãîâ : " + Integer.toString(kolFlag));
+                jLabel2.setText("ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ„Ð»Ð°Ð³Ð¾Ð² : " + Integer.toString(kolFlag));
                 jPanel2.revalidate();
                 jPanel2.repaint();
                 return;
@@ -130,7 +130,7 @@ public class Window extends javax.swing.JFrame {
         if (permissionToPlay && (button.getText()).equals("#")) {
             button.setText("*");
             kolFlag--;
-            jLabel2.setText("êîëè÷åñòâî ôëàãîâ : " + Integer.toString(kolFlag));
+            jLabel2.setText("ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ„Ð»Ð°Ð³Ð¾Ð² : " + Integer.toString(kolFlag));
             jPanel2.revalidate();
             jPanel2.repaint();
             return;
@@ -148,7 +148,7 @@ public class Window extends javax.swing.JFrame {
             }
             if (booleanMassBomb[button.getCastomHeight()][button.getCastomWidth()]) {
                 button.setText("@");
-                jLabel1.setText("vi proigrali");
+                jLabel1.setText("Ð’Ñ‹ Ð¿Ñ€Ð¾Ð¸Ð³Ñ€Ð°Ð»Ð¸");
                 permissionToPlay = false;
             } else {
                 numberBomb(button);
@@ -245,7 +245,7 @@ public class Window extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 100));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
-        jButton1.setText("íà÷àòü íîâóþ èãðó");
+        jButton1.setText("ÐÐ¾Ð²Ð°Ñ Ð¸Ð³Ñ€Ð°");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -253,7 +253,7 @@ public class Window extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
 
-        jButton2.setText("äàòü îòâåò");
+        jButton2.setText("Ð´Ð°Ñ‚ÑŒ Ð¾Ñ‚Ð²ÐµÑ‚");
         jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +265,7 @@ public class Window extends javax.swing.JFrame {
         jLabel2.setText("0");
         jPanel1.add(jLabel2);
 
-        jLabel3.setText("êîëè÷åñòâî áîìá íà ïîëå");
+        jLabel3.setText("-");
         jPanel1.add(jLabel3);
 
         jLabel1.setText("-");
@@ -279,9 +279,9 @@ public class Window extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
         getContentPane().add(jPanel2);
 
-        jMenu1.setText("Ìåíþ");
+        jMenu1.setText("Ð¼ÐµÐ½ÑŽ");
 
-        jMenuItem1.setText("íàñòðîéêè");
+        jMenuItem1.setText("ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -289,7 +289,7 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("ñìåíèòü ïîëüçîâàòåëÿ");
+        jMenuItem2.setText("Ð¡Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -297,7 +297,7 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("òàáëèöà ðåçóëüòàòîâ");
+        jMenuItem3.setText("Ð¢Ð°Ð±Ð»Ð¸Ñ†Ð° Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð²");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -316,7 +316,7 @@ public class Window extends javax.swing.JFrame {
         if (user.getKolBomb() == kolFlag) {
             for (Bomb bomb : objectMassBomb) {
                 if (!massButton[bomb.getHeight()][bomb.getWidth()].getText().equals("#")) {
-                    jLabel1.setText("nepravilno postavlen flag");
+                    jLabel1.setText("Ð½ÐµÐ¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ð¾ Ñ€Ð°ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ñ‹ Ñ„Ð»Ð°Ð³Ð¸");
                     permissionToPlay = false;
                     return;
                 }
@@ -324,13 +324,13 @@ public class Window extends javax.swing.JFrame {
             if (permissionToPlay) {
                 time = System.currentTimeMillis() - time;
             }
-            jLabel1.setText("vi viigrali");
+            jLabel1.setText("Ð²Ñ‹ Ð¿Ñ€Ð¾Ð¸Ð³Ñ€Ð°Ð»Ð¸");
             permissionToPlay = false;
             new Win(user, time).setVisible(true);
 
         } else {
-            jLabel1.setText("kol bomb > flagov");
-            permissionToPlay = false;
+            jLabel1.setText("Ð±Ð¾Ð¼Ð± Ð±Ð¾Ð»ÑŒÑˆÐµ Ñ‡ÐµÐ¼ Ñ„Ð»Ð°Ð³Ð¾Ð²");
+
         }
 
 
@@ -350,7 +350,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        new ResultPane(user).setVisible(true);
+        new ResultPane().setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

@@ -11,23 +11,30 @@ import ru.bersenev.miner.user.service.UserService;
 import javax.swing.*;
 
 /**
- * @author пїЅ
+ * @author ?
  */
 public class Win extends javax.swing.JFrame {
+    private int vibor;
+    private boolean prohod;
+    private User user;
+    private UserService userService = new UserService();
 
     /**
      * Creates new form Win
      */
     public Win(User user, long time) {
+        this.user = user;
+        vibor = 0;
+        prohod = true;
         initComponents();
         CentreWindow.centreWindow(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jLabel3.setText(Long.toString(time));
-        UserService userService = new UserService();
-        user = userService.addResult(user, time);
-        jLabel5.setText(Long.toString(user.getTime()));
 
-        jTextArea1.setText(userService.getTopWinUser(user));
+        user = userService.addResult(user, time);
+        jLabel5.setText(userService.getMinResult(user));//********
+
+        // jTextArea1.setText(userService.getTopWinUser(user, 10));//***********
     }
 
     /**
@@ -47,16 +54,22 @@ public class Win extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel1.setToolTipText("55555");
+        jPanel1.setPreferredSize(new java.awt.Dimension(400, 340));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        infoPanel.setPreferredSize(new java.awt.Dimension(100, 56));
         infoPanel.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Вы выиграли ");
@@ -95,30 +108,92 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         infoPanel.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("Лучшие игроки в при данных настройках ");
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jSpinner1.setPreferredSize(new java.awt.Dimension(60, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoPanel.add(jSpinner1, gridBagConstraints);
+
+        jButton1.setText("сброс");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        infoPanel.add(jButton1, gridBagConstraints);
+
+        jLabel6.setText("Лучшие игроки в при данных настройках ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
         infoPanel.add(jLabel6, gridBagConstraints);
 
-        jPanel1.add(infoPanel, java.awt.BorderLayout.NORTH);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "время при моих настройках", "лучшее время", "лучшее время при кол бомб", "лучшее время при размере", "результаты пользователя" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        infoPanel.add(jComboBox1, gridBagConstraints);
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(250, 100));
+        jButton2.setText("выдать");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        infoPanel.add(jButton2, gridBagConstraints);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setPreferredSize(new java.awt.Dimension(230, 310));
-        jScrollPane1.setViewportView(jTextArea1);
+        jPanel1.add(infoPanel, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setPreferredSize(new java.awt.Dimension(100, 50));
+        jScrollPane2.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane2, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (prohod) {
+            if (jComboBox1.getSelectedIndex() == 0) {
+                jTextArea1.setText(userService.getTopWinUser(user, (Integer) jSpinner1.getValue()));
+            } else {
+                vibor = jComboBox1.getSelectedIndex();
+                prohod = false;
+            }
+        } else {
+           switch (vibor){
+               case 1 : 
+           }
+
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"время при моих настройках", "лучшее время", "лучшее время при кол бомб", "лучшее время при размере", "результаты пользователя"}));
+        prohod = true;
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,6 +232,9 @@ public class Win extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel infoPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -164,7 +242,8 @@ public class Win extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
