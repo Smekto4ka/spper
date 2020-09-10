@@ -159,4 +159,34 @@ public class UserDao {
 
         return Long.toString((Long) resultList.get(0));
     }
+    public List<Object[]> getResultBy(String requestSQL , String variableSQL , String variable , int kol){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List resultList = session.createQuery(
+                requestSQL)
+                 //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter(variableSQL, variable).setMaxResults(kol).getResultList();
+        session.close();
+        return resultList;
+    }
+    public List<Object[]> getResultMySettings(User user , int kol){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List resultList = session.createQuery(
+                "select r.user.name, r.kolBomb , r.length , min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb group by r.user.name and order by r.time asc")
+//"select min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb  group by r.user.name"
+      //  select r.user.name , count(r.user.name) , sum(r.time) from ResultTable r group by r.user.name
+                .setParameter("length", user.getLength()).setParameter("kolBomb", user.getKolBomb()).getResultList();
+        session.close();
+
+        return resultList;
+    }
+
+    public List<Object[]> getMassStringColumnValues(String string){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List resultList = session.createQuery(
+           "select ." + string+" from ResultTable r group by r."+string    )
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .getResultList();
+        session.close();
+        return resultList;
+    }
 }

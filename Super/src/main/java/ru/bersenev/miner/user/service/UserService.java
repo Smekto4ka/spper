@@ -67,4 +67,13 @@ public class UserService {
     public void getResultsPerClient() {
 
     }*/
+  public List<Object[]> getWinUserMySettings(User user , int kol){
+    return userDao.getResultMySettings(user,kol);
+  }
+
+  public String[] getStringColumnValues(String string){
+      List list = userDao.getMassStringColumnValues(string);
+String[] str = new String[list.size()];
+
+  }
 }

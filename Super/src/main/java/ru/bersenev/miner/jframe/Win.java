@@ -7,8 +7,10 @@ package ru.bersenev.miner.jframe;
 
 import ru.bersenev.miner.user.service.User;
 import ru.bersenev.miner.user.service.UserService;
+import ru.bersenev.miner.user.service.UserTableResultModel;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author ?
@@ -59,6 +61,7 @@ public class Win extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -69,7 +72,7 @@ public class Win extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 340));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        infoPanel.setPreferredSize(new java.awt.Dimension(100, 56));
+        infoPanel.setPreferredSize(new java.awt.Dimension(100, 200));
         infoPanel.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Вы выиграли ");
@@ -149,7 +152,9 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         infoPanel.add(jButton2, gridBagConstraints);
 
-        jPanel1.add(infoPanel, java.awt.BorderLayout.CENTER);
+        jPanel1.add(infoPanel, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 100));
 
@@ -167,31 +172,62 @@ public class Win extends javax.swing.JFrame {
         jTable1.setPreferredSize(new java.awt.Dimension(100, 50));
         jScrollPane2.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane2, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (prohod) {
-            if (jComboBox1.getSelectedIndex() == 0) {
-                jTextArea1.setText(userService.getTopWinUser(user, (Integer) jSpinner1.getValue()));
-            } else {
-                vibor = jComboBox1.getSelectedIndex();
-                prohod = false;
-            }
-        } else {
-           switch (vibor){
-               case 1 : 
-           }
 
+    /*  jPanel3.removeAll();
+     JScrollPane scrollPane = new JScrollPane();
+     UserTableModel tableModel = new UserTableModel(userDao.getResult());
+     JTable table = new JTable(tableModel);
+         scrollPane.setViewportView(table);
+         jPanel3.add(scrollPane, BorderLayout.CENTER);
+         jPanel3.revalidate();
+         jPanel3.repaint();*/
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        if (prohod) {
+            switch (jComboBox1.getSelectedIndex()) {
+                case 0: {
+                    jPanel2.removeAll();
+                    JScrollPane scrollPane = new JScrollPane();
+
+                    UserTableResultModel tableModel = new UserTableResultModel(userService.getWinUserMySettings(user, (Integer) jSpinner1.getValue()));
+                    JTable table = new JTable(tableModel);
+                    scrollPane.setViewportView(table);
+                    jPanel2.add(scrollPane, BorderLayout.CENTER);
+                    jPanel2.revalidate();
+                    jPanel2.repaint();
+                    return;
+                }
+                case 1: {
+                    vibor = jComboBox1.getSelectedIndex();
+                    prohod = false;
+                    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(userService.getStringColumnValues("name.name")));
+
+                }
+            }
+            vibor = jComboBox1.getSelectedIndex();
+            prohod = false;
+
+        } else {
+            jPanel2.removeAll();
+            switch (vibor) {
+                case 1:
+            }
+            jPanel2.revalidate();
+            jPanel2.repaint();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"время при моих настройках", "лучшее время", "лучшее время при кол бомб", "лучшее время при размере", "результаты пользователя"}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"время при моих настройках", "рекорд пользователя", "лучшее время при кол бомб", "лучшее время при размере", "результаты пользователя"}));
         prohod = true;
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -242,6 +278,7 @@ public class Win extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
