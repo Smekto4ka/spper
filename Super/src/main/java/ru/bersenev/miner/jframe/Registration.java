@@ -12,7 +12,7 @@ import ru.bersenev.miner.user.service.UserService;
 import javax.swing.*;
 
 /**
- * @author �
+ * @author ?
  */
 public class Registration extends javax.swing.JFrame {
     private boolean startGame;
@@ -76,13 +76,13 @@ public class Registration extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Вы в окне регистрации , заполните поля:");
+        jLabel1.setText("You are in the registration window, fill in the fields");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Ваш игровой ник:");
+        jLabel2.setText("Your game nickname:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -90,7 +90,7 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setText("Размер поля:");
+        jLabel3.setText("Field size:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -98,7 +98,7 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("введите количество бомб ( < 30%):");
+        jLabel4.setText("enter the number of bombs ( < 30%):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -115,21 +115,21 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jTextField1, gridBagConstraints);
 
-        jRadioButton1.setText("количество бомб задается в процентах");
+        jRadioButton1.setText( "the number of bombs is set as a percentage");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jRadioButton1, gridBagConstraints);
 
-        jRadioButton2.setText("количество бомб задается числом");
+        jRadioButton2.setText("the number of bombs is given by the number");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 50);
         jPanel1.add(jRadioButton2, gridBagConstraints);
 
-        jLabel6.setText("Введите значение:");
+        jLabel6.setText("Enter value:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -137,7 +137,7 @@ public class Registration extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel6, gridBagConstraints);
 
-        jButton1.setText("Зарегистрироваться");
+        jButton1.setText("Register now");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

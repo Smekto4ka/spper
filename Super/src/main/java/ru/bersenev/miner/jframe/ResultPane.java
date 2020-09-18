@@ -22,12 +22,13 @@ public class ResultPane extends javax.swing.JFrame {
 
 
     public ResultPane() {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         CentreWindow.centreWindow(this);
 
         initComponents();
        userDao.findUserAll();
        resultTable();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
     }
 
@@ -80,11 +81,11 @@ public class ResultPane extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 100));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Таблица результатов");
+        jLabel1.setText("results table");
         jLabel1.setToolTipText("");
         jPanel2.add(jLabel1, new java.awt.GridBagConstraints());
 
-        jButton1.setText("обновить");
+        jButton1.setText("update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

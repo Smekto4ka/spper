@@ -47,9 +47,9 @@ public class Window extends javax.swing.JFrame {
         kolFlag = 0;
 
         objectMassBomb = new Bomb[user.getKolBomb()];
-        jLabel3.setText("количество бомб на поле : " + Integer.toString(user.getKolBomb()));
+        jLabel3.setText( "number of bombs on the field : " + Integer.toString(user.getKolBomb()));
         jPanel2.removeAll();
-        jLabel2.setText("количество флагов : " + Integer.toString(kolFlag));
+        jLabel2.setText("number of flags: " + Integer.toString(kolFlag));
         jLabel1.setText("-");
 
         initBomb();
@@ -121,7 +121,7 @@ public class Window extends javax.swing.JFrame {
             if ((button.getText()).equals("*")) {
                 button.setText("#");
                 kolFlag++;
-                jLabel2.setText("количество флагов : " + Integer.toString(kolFlag));
+                jLabel2.setText("number of flags : " + Integer.toString(kolFlag));
                 jPanel2.revalidate();
                 jPanel2.repaint();
                 return;
@@ -130,7 +130,7 @@ public class Window extends javax.swing.JFrame {
         if (permissionToPlay && (button.getText()).equals("#")) {
             button.setText("*");
             kolFlag--;
-            jLabel2.setText("количество флагов : " + Integer.toString(kolFlag));
+            jLabel2.setText("number of flags : " + Integer.toString(kolFlag));
             jPanel2.revalidate();
             jPanel2.repaint();
             return;
@@ -148,7 +148,7 @@ public class Window extends javax.swing.JFrame {
             }
             if (booleanMassBomb[button.getCastomHeight()][button.getCastomWidth()]) {
                 button.setText("@");
-                jLabel1.setText("Вы проиграли");
+                jLabel1.setText("You lost");
                 permissionToPlay = false;
             } else {
                 numberBomb(button);
@@ -245,7 +245,7 @@ public class Window extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 100));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 20, 5));
 
-        jButton1.setText("Новая игра");
+        jButton1.setText("A new game");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -253,7 +253,7 @@ public class Window extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
 
-        jButton2.setText("дать ответ");
+        jButton2.setText("give an answer");
         jButton2.setToolTipText("");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,9 +279,9 @@ public class Window extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridBagLayout());
         getContentPane().add(jPanel2);
 
-        jMenu1.setText("меню");
+        jMenu1.setText("Menu");
 
-        jMenuItem1.setText("Настройки");
+        jMenuItem1.setText("Settngs");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -289,7 +289,7 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Сменить пользователя");
+        jMenuItem2.setText("Change user");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -297,7 +297,7 @@ public class Window extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("Таблица результатов");
+        jMenuItem3.setText("Results table");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -316,7 +316,7 @@ public class Window extends javax.swing.JFrame {
         if (user.getKolBomb() == kolFlag) {
             for (Bomb bomb : objectMassBomb) {
                 if (!massButton[bomb.getHeight()][bomb.getWidth()].getText().equals("#")) {
-                    jLabel1.setText("неправильно раставлены флаги");
+                    jLabel1.setText("flags placed incorrectly");
                     permissionToPlay = false;
                     return;
                 }
@@ -324,12 +324,13 @@ public class Window extends javax.swing.JFrame {
             if (permissionToPlay) {
                 time = System.currentTimeMillis() - time;
             }
-            jLabel1.setText("вы проиграли");
+            jLabel1.setText("you lost");
+
+            new Win(user, time,permissionToPlay).setVisible(true);
             permissionToPlay = false;
-            new Win(user, time).setVisible(true);
 
         } else {
-            jLabel1.setText("бомб больше чем флагов");
+            jLabel1.setText("more bombs than flags");
 
         }
 

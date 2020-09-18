@@ -24,7 +24,7 @@ public class Win extends javax.swing.JFrame {
     /**
      * Creates new form Win
      */
-    public Win(User user, long time) {
+    public Win(User user, long time, boolean permissionToPlay) {
         this.user = user;
         vibor = 0;
         prohod = true;
@@ -32,9 +32,25 @@ public class Win extends javax.swing.JFrame {
         CentreWindow.centreWindow(this);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jLabel3.setText(Long.toString(time));
+        if (permissionToPlay)
+            user = userService.addResult(user, time);
 
-        user = userService.addResult(user, time);
         jLabel5.setText(userService.getMinResult(user));//********
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(userService.getStringColumn()));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(userService.getIntegerColumn("length")));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(userService.getIntegerColumn("kolBomb")));
+
+        jPanel2.removeAll();
+        JScrollPane scrollPane = new JScrollPane();
+        UserTableResultModel tableModel = new UserTableResultModel(
+                userService.getResultBy(null,null,null)
+        );
+        JTable table = new JTable(tableModel);
+        scrollPane.setViewportView(table);
+        jPanel2.add(scrollPane, BorderLayout.CENTER);
+        jPanel2.revalidate();
+        jPanel2.repaint();
 
         // jTextArea1.setText(userService.getTopWinUser(user, 10));//***********
     }
@@ -56,11 +72,12 @@ public class Win extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -72,16 +89,17 @@ public class Win extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 340));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        infoPanel.setPreferredSize(new java.awt.Dimension(100, 200));
+        infoPanel.setPreferredSize(new java.awt.Dimension(100, 300));
+        infoPanel.setRequestFocusEnabled(false);
         infoPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Вы выиграли ");
+        jLabel1.setText("You won ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         infoPanel.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Ваш результат : ");
+        jLabel2.setText("Your result : ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -96,7 +114,7 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
         infoPanel.add(jLabel3, gridBagConstraints);
 
-        jLabel4.setText("<html>Ваш лучший результат<br>при данных настройках</html>");
+        jLabel4.setText("your result with these settings");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -111,37 +129,22 @@ public class Win extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         infoPanel.add(jLabel5, gridBagConstraints);
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        jSpinner1.setPreferredSize(new java.awt.Dimension(60, 20));
+        jLabel6.setText("The best players in the given settings ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        infoPanel.add(jSpinner1, gridBagConstraints);
-
-        jButton1.setText("сброс");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        infoPanel.add(jButton1, gridBagConstraints);
-
-        jLabel6.setText("Лучшие игроки в при данных настройках ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         infoPanel.add(jLabel6, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "время при моих настройках", "лучшее время", "лучшее время при кол бомб", "лучшее время при размере", "результаты пользователя" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4"  }));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         infoPanel.add(jComboBox1, gridBagConstraints);
 
-        jButton2.setText("выдать");
+        jButton2.setText("return the result");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -149,8 +152,35 @@ public class Win extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         infoPanel.add(jButton2, gridBagConstraints);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoPanel.add(jComboBox2, gridBagConstraints);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoPanel.add(jComboBox3, gridBagConstraints);
+
+        jButton3.setText("Update");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        infoPanel.add(jButton3, gridBagConstraints);
 
         jPanel1.add(infoPanel, java.awt.BorderLayout.NORTH);
 
@@ -159,15 +189,15 @@ public class Win extends javax.swing.JFrame {
         jScrollPane2.setPreferredSize(new java.awt.Dimension(100, 100));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+                new Object [][] {
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null},
+                        {null, null, null, null}
+                },
+                new String [] {
+                        "Title 1", "Title 2", "Title 3", "Title 4"
+                }
         ));
         jTable1.setPreferredSize(new java.awt.Dimension(100, 50));
         jScrollPane2.setViewportView(jTable1);
@@ -191,45 +221,27 @@ public class Win extends javax.swing.JFrame {
          jPanel3.revalidate();
          jPanel3.repaint();*/
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        System.out.println((jComboBox1.getSelectedItem()) instanceof String);
+        jPanel2.removeAll();
+        JScrollPane scrollPane = new JScrollPane();
+        UserTableResultModel tableModel = new UserTableResultModel(
+                userService.getResultBy((String) jComboBox1.getSelectedItem(), (Integer) jComboBox2.getSelectedItem(), (Integer) jComboBox3.getSelectedItem())
+        );
+        JTable table = new JTable(tableModel);
+        scrollPane.setViewportView(table);
+        jPanel2.add(scrollPane, BorderLayout.CENTER);
+        jPanel2.revalidate();
+        jPanel2.repaint();
 
-        if (prohod) {
-            switch (jComboBox1.getSelectedIndex()) {
-                case 0: {
-                    jPanel2.removeAll();
-                    JScrollPane scrollPane = new JScrollPane();
 
-                    UserTableResultModel tableModel = new UserTableResultModel(userService.getWinUserMySettings(user, (Integer) jSpinner1.getValue()));
-                    JTable table = new JTable(tableModel);
-                    scrollPane.setViewportView(table);
-                    jPanel2.add(scrollPane, BorderLayout.CENTER);
-                    jPanel2.revalidate();
-                    jPanel2.repaint();
-                    return;
-                }
-                case 1: {
-                    vibor = jComboBox1.getSelectedIndex();
-                    prohod = false;
-                    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(userService.getStringColumnValues("name.name")));
-
-                }
-            }
-            vibor = jComboBox1.getSelectedIndex();
-            prohod = false;
-
-        } else {
-            jPanel2.removeAll();
-            switch (vibor) {
-                case 1:
-            }
-            jPanel2.revalidate();
-            jPanel2.repaint();
-        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"время при моих настройках", "рекорд пользователя", "лучшее время при кол бомб", "лучшее время при размере", "результаты пользователя"}));
-        prohod = true;
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(userService.getStringColumn()));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(userService.getIntegerColumn("length")));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(userService.getIntegerColumn("kolBomb")));
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,9 +280,11 @@ public class Win extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel infoPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -280,7 +294,6 @@ public class Win extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

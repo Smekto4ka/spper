@@ -26,7 +26,6 @@ public class Settings extends javax.swing.JFrame {
      */
     public Settings(Window windowGame, User users) {
         this.users = users;
-        this.users = users;
         this.windowGame = windowGame;
         initComponents();
         CentreWindow.centreWindow(this);
@@ -77,7 +76,7 @@ public class Settings extends javax.swing.JFrame {
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("введите ширину поля:");
+        jLabel1.setText("enter the field width:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -95,7 +94,7 @@ public class Settings extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jSpinner1, gridBagConstraints);
 
-        jLabel2.setText("введите количество бомб ( < 30%):");
+        jLabel2.setText("enter the number of bombs ( < 30%):");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -103,7 +102,7 @@ public class Settings extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jRadioButton1.setText("количество бомб задается в процентах");
+        jRadioButton1.setText("the number of bombs is set as a percentage");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -115,7 +114,7 @@ public class Settings extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jRadioButton1, gridBagConstraints);
 
-        jRadioButton2.setText("количество бомб задается числом");
+        jRadioButton2.setText("the number of bombs is given by the number");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;

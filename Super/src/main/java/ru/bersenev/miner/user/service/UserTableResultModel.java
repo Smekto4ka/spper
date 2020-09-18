@@ -34,10 +34,11 @@ public class UserTableResultModel extends AbstractTableModel {
 
 
     private enum Column {
-        NAME("ник"),
+        NAME("Nik"),
         KOL_BOMB("kol bomb"),
         LENGTH("length"),
-        TIME("время");
+        TIME("time"),
+        RATING("rating");
 
         private String str;
 

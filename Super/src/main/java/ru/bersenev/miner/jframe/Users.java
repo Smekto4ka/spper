@@ -11,7 +11,7 @@ import ru.bersenev.miner.user.service.UserService;
 import javax.swing.*;
 
 /**
- * @author �
+ * @author ?
  */
 public class Users extends javax.swing.JFrame {
     private boolean startGame;
@@ -27,6 +27,7 @@ public class Users extends javax.swing.JFrame {
         CentreWindow.centreWindow(this);
         startGame = true;
         userService = new UserService();
+
         //Exception in thread "AWT-EventQueue-0" javax.persistence.PersistenceException: org.hibernate.HibernateException: Illegal attempt to associate a collection with two open sessions. Collection : [ru.bersenev.miner.hibernate.UsersTable.reseltTables#9999]
       /*  UsersTable us = userService.userAuthorization("111");
         us.deletResult();
@@ -70,13 +71,13 @@ public class Users extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("Добро пожаловать.");
+        jLabel1.setText("Welcome");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("Введите ник:");
+        jLabel2.setText("Enter nickname:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -93,7 +94,7 @@ public class Users extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(jTextField1, gridBagConstraints);
 
-        jButton1.setText("Авторизироваться");
+        jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -106,7 +107,7 @@ public class Users extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 70, 10, 10);
         jPanel1.add(jButton1, gridBagConstraints);
 
-        jLabel3.setText("Авторизируйтесь. Если вы впервые, то нажмите кнопку регистрации.");
+        jLabel3.setText("Please login. If this is your first time, then click the registration button.");
         jLabel3.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -114,7 +115,7 @@ public class Users extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jButton2.setText("Зарегистрироваться");
+        jButton2.setText("Register now");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -136,7 +137,7 @@ public class Users extends javax.swing.JFrame {
         String name = jTextField1.getText();
         User user = userService.userAuthorization(name);
         if (user == null) {
-            JOptionPane.showMessageDialog(null, "Такой ник существует\n придумайте другой", "Warning", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "such a nickname exists, come up with another", "Warning", JOptionPane.PLAIN_MESSAGE);
             return;
         }
 

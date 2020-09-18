@@ -159,34 +159,136 @@ public class UserDao {
 
         return Long.toString((Long) resultList.get(0));
     }
-    public List<Object[]> getResultBy(String requestSQL , String variableSQL , String variable , int kol){
-        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        List resultList = session.createQuery(
-                requestSQL)
-                 //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
-                .setParameter(variableSQL, variable).setMaxResults(kol).getResultList();
-        session.close();
-        return resultList;
-    }
+
     public List<Object[]> getResultMySettings(User user , int kol){
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         List resultList = session.createQuery(
                 "select r.user.name, r.kolBomb , r.length , min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb group by r.user.name and order by r.time asc")
 //"select min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb  group by r.user.name"
       //  select r.user.name , count(r.user.name) , sum(r.time) from ResultTable r group by r.user.name
-                .setParameter("length", user.getLength()).setParameter("kolBomb", user.getKolBomb()).getResultList();
+                .setParameter("length", user.getLength()).setParameter("kolBomb", user.getKolBomb()).setMaxResults(kol).getResultList();
         session.close();
 
         return resultList;
     }
 
-    public List<Object[]> getMassStringColumnValues(String string){
+    public List<Object> getListName(){
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         List resultList = session.createQuery(
-           "select ." + string+" from ResultTable r group by r."+string    )
-                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                "select r.user.name from ResultTable r group by r.user.name")
+               //"select min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb  group by r.user.name"
+                //  select r.user.name , count(r.user.name) , sum(r.time) from ResultTable r group by r.user.name
                 .getResultList();
+        session.close();
+
+        return resultList;
+    }
+    public List<Object> getListKolBomb(){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List resultList = session.createQuery(
+                "select r.kolBomb from ResultTable r group by r.kolBomb")
+                //"select min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb  group by r.user.name"
+                //  select r.user.name , count(r.user.name) , sum(r.time) from ResultTable r group by r.user.name
+                .getResultList();
+        session.close();
+
+        return resultList;
+    }
+    public List<Object> getListLength(){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List resultList = session.createQuery(
+                "select r.length from ResultTable r group by r.length")
+                //"select min(r.time) from ResultTable r where r.length=:length and r.kolBomb=:kolBomb  group by r.user.name"
+                //  select r.user.name , count(r.user.name) , sum(r.time) from ResultTable r group by r.user.name
+                .getResultList();
+        session.close();
+
+        return resultList;
+    }
+
+
+    ////// dlya WIN
+
+
+    public List<Object[]> getResultByName(String name){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.user.name=:name")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("name", name).getResultList();
         session.close();
         return resultList;
     }
+    public List<Object[]> getResultByLength(Integer length){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.length=:length")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("length", length).getResultList();
+        session.close();
+        return resultList;
+    }
+    public List<Object[]> getResultByKolBomb(Integer kolBomb){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.kolBomb=:kolBomb")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("kolBomb", kolBomb).getResultList();
+        session.close();
+        return resultList;
+    }
+    public List<Object[]> getResultByNameAndLength(String name,Integer length){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.user.name=:name and r.length=:length")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("name", name).setParameter("length",length).getResultList();
+        session.close();
+        return resultList;
+    }
+    public List<Object[]> getResultByNameAndKolBomb(String name , Integer kolBomb){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.kolBomb=:kolBomb and r.user.name=:name")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("kolBomb", kolBomb).setParameter("name", name).getResultList();
+        session.close();
+        return resultList;
+    }
+    public List<Object[]> getResultByKolBombAndLength(Integer kolBomb, Integer length){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.kolBomb=:kolBomb and r.length =:length")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("kolBomb", kolBomb).setParameter("length", length).getResultList();
+        session.close();
+        return resultList;
+    }
+    public List<Object[]> getResultByNameAndLengthAndKolBomb(String name , Integer length , Integer kolBomb){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+        List resultList = session.createQuery(
+                "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r where r.user.name =:name and r.length =:length and r.kolBomb=:kolBomb")
+                //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                .setParameter("name" , name).setParameter("length", length).setParameter("kolBomb", kolBomb).getResultList();
+        session.close();
+        return resultList;
+    }
+     public List<Object[]> getListForResultsWin(){
+         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+
+         List resultList = session.createQuery(
+                 "select r.user.name , r.kolBomb , r.length , r.time from ResultTable r ")
+                 //   "select rt from ResultTable rt where rt.user.name = :name order by rt.time desc", ResultTable.class)
+                 .getResultList();
+         session.close();
+         return resultList;
+     }
+
 }
